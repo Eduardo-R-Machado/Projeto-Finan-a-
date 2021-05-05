@@ -1,5 +1,5 @@
 # Projeto-Financeiro
 
 ## Onde parei
-1 hora 26 minutos da aula 2 
-        configurando o modal
+Aula 3  >>1:18:35<<
+Colocando ids nos displays.
