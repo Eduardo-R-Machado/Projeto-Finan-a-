@@ -139,6 +139,12 @@ const Utils = {
     }
 }
 
+const Form = {
+    submit (event) {
+        
+    }
+}
+
 const App = {
     init() {
         transactions.all.forEach(transaction => {
