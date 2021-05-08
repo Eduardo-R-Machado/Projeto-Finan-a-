@@ -123,6 +123,18 @@ const DOM ={
 } 
 
 const Utils = {
+    formatAmount(value) {
+        value = Number(value) *100
+
+        return value
+    },
+
+    formatDate(date) {
+        const splitittedDate = date.split("-")
+        return `${splitittedDate[2]}/${splitittedDate[1]}/${splitittedDate[0]}`
+
+    },
+
     formatCurrency(value) {
         const signal = Number(value) < 0 ? "-" : ""
 
@@ -140,8 +152,61 @@ const Utils = {
 }
 
 const Form = {
+
+    description: document.querySelector('input#description'),
+    amount: document.querySelector('input#amount'),
+    date: document.querySelector('input#date'),
+
+    getValues() {
+        return{
+            description: Form.description.value,
+            amount: Form.amount.value,
+            date: Form.date.value,
+        }
+    },
+
+    validateFields() {
+        const { description, amount, date } = Form.getValues()
+        if(description.trim() === "" ||
+           amount.trim() === "" ||
+           date.trim() === "") {
+               throw new Error("Preencha todos os campos!")
+           }
+    
+    },
+
+    formatValues() {
+        let { description, amount, date } = Form.getValues()
+
+        amount = Utils.formatAmount(amount)
+
+        date= Utils.formatDate(Date)
+
+        return {
+            description,
+            amount,
+            date
+        }
+    },
+
+    saveTransaction() {
+        Transaction.Add(transaction)
+    },
+
     submit (event) {
-        
+        event.preventDefault()
+
+        try {
+            Form.validateFields()
+
+            const transaction = Form.formatValues()
+
+            Form.saveTransaction()
+            
+        } catch (error) {
+            alert(error.message)
+            
+        }
     }
 }
 
